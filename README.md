@@ -20,6 +20,7 @@ Made with [contrib.rocks](https://contrib.rocks).
 - [renj848](https://github.com/renj848)
 - [properfunction](https://github.com/properfunction)
 - [shanf-gh](https://github.com/shanf-gh)
+- [brettearle](https://github.com/brettearle)
 
 ## How it's going to be made:
 **Tech we will use:** HTML, CSS & JavaScript
