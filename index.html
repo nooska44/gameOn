@@ -10,16 +10,40 @@
   
   <link rel="stylesheet" href="css/style.css">
 
-  <title>Document</title>
+  <title>gameOn</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon_io/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon_io/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon_io/favicon-16x16.png">
   <link rel="manifest" href="./images/favicon_io/site.webmanifest">
-
+  
 </head>
 
 <body>
+  <!-- Classes are for CSS styling and id are for JavaScript (JS) -->
+  
+  <!-- GAME BOARD -->
+  <div class="board" id="board">
+    <!-- 9 divs for 9 game tiles -->
+    <!-- data-cell is for easy access in JS -->
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+  </div>
+  
+  <!-- END GAME SCREEN -->
+  <div class="winning-message" id="winningMessage">
+    <!-- div for winning message text -->
+    <div data-winning-message-text></div>
+    <!-- Restart button -->
+    <button id="restartButton">Restart</button>
+  </div>
 
   <script type="text/javascript" src="js/main.js"></script>
 </body>

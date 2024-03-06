@@ -1,0 +1,62 @@
+/* Make everything border box */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* --cell-size variable set at 100px for the cells on game board */
+:root {
+    --cell-size: 100px;
+    /* the size of our X's and O's will be 90% of cell size */
+    --mark-size: calc(var(--cell-size) * .9);
+}
+
+
+/* Remove margins */
+body {
+    margin: 0;
+}
+
+.board {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    /* Center content */
+    justify-content: center;
+    align-content: center;
+    /* Center X's and O's */
+    justify-items: center;
+    align-items: center;    
+    /* 3 columns auto-sized */
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+    /* width & height are using cell-size set by the --cell-size variable in the :root further up the cascade */
+    width: var(--cell-size);
+    height: var(--cell-size); 
+    border: 1px solid black;
+}
+
+/* Remove top borders */
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+/* Remove right borders */
+.cell:nth-child(3n) {
+    border-right: none;
+}
+
+/* Remove left borders */
+.cell:nth-child(3n + 1) {
+    border-left: none;
+}
+
+/* Remove bottom borders */
+.cell:nth-child(6) ~ .cell {
+    border-bottom: none;
+}
