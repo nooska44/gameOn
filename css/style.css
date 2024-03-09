@@ -37,6 +37,19 @@ body {
     width: var(--cell-size);
     height: var(--cell-size); 
     border: 1px solid black;
+    /* Need to display and center to show pseudo elements */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* Changed cursor to a pointer */
+    cursor: pointer;
+}
+
+.cell.x,
+.cell.circle {
+    /* If cell already has an X or O, cursor shows action is not-allowed */
+    cursor: not-allowed;
 }
 
 /* Remove top borders */
@@ -60,3 +73,49 @@ body {
 .cell:nth-child(6) ~ .cell {
     border-bottom: none;
 }
+
+/* Style X's */
+.cell.x::before,
+.cell.x::after {
+    /* Provide content with height, width and background color to ensure the elements render */
+    content: '';
+    height: var(--mark-size);
+    width: calc(var(--mark-size) * .15);
+    background: black;
+    position: absolute;
+}
+
+.cell.x::before {
+    /* rotate class x before content on 45 degree angle to form one 'arm' of X */
+    transform: rotate(45deg);
+}
+
+.cell.x::after {
+    /* rotate class x after content on -45 degree angle to form second 'arm' of X */
+    transform: rotate(-45deg);
+}
+
+/* Style O's */
+.cell.circle::before,
+.cell.circle::after {
+    /* provide content so pseudo elements show */
+    content: '';
+    position: absolute;
+    /* Round the corners to transform square into circle */
+    border-radius: 50%;
+}
+
+.cell.circle::before {
+    /* First circle will be the larger 'outer' ring */
+    background: black;
+    height: var(--mark-size);
+    width: var(--mark-size);
+}
+
+.cell.circle::after {
+    /* Second circle is smaller and white to 'hollow out' larger black circle */
+    background: white;
+    height: calc(var(--mark-size) * .7);
+    width: calc(var(--mark-size) * .7);
+}
+
