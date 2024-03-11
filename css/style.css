@@ -46,9 +46,9 @@ body {
     cursor: pointer;
 }
 
+/* If cell already has an X or O, cursor shows action is not-allowed */
 .cell.x,
 .cell.circle {
-    /* If cell already has an X or O, cursor shows action is not-allowed */
     cursor: not-allowed;
 }
 
@@ -74,30 +74,51 @@ body {
     border-bottom: none;
 }
 
+/* Set cursor color to black */
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before {
+    background: black;
+}
+
+/* Set cursor color to gray when hovering utilising cascade */
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    background: lightgray;
+}
+
 /* Style X's */
 .cell.x::before,
-.cell.x::after {
+.cell.x::after,
+/* Styling X cursor on hover when not already .x or .circle class */
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after {
     /* Provide content with height, width and background color to ensure the elements render */
     content: '';
     height: var(--mark-size);
     width: calc(var(--mark-size) * .15);
-    background: black;
     position: absolute;
 }
 
-.cell.x::before {
-    /* rotate class x before content on 45 degree angle to form one 'arm' of X */
+/* rotate class x before content on 45 degree angle to form one 'arm' of X */
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before {
     transform: rotate(45deg);
 }
 
-.cell.x::after {
-    /* rotate class x after content on -45 degree angle to form second 'arm' of X */
+/* rotate class x after content on -45 degree angle to form second 'arm' of X */
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after {
     transform: rotate(-45deg);
 }
 
 /* Style O's */
 .cell.circle::before,
-.cell.circle::after {
+.cell.circle::after,
+/* Styling O's on hover when not already .x or .circle class */
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after {
     /* provide content so pseudo elements show */
     content: '';
     position: absolute;
@@ -105,17 +126,55 @@ body {
     border-radius: 50%;
 }
 
-.cell.circle::before {
-    /* First circle will be the larger 'outer' ring */
-    background: black;
+/* First circle will be the larger 'outer' ring */
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before {
     height: var(--mark-size);
     width: var(--mark-size);
 }
 
-.cell.circle::after {
-    /* Second circle is smaller and white to 'hollow out' larger black circle */
+/* Second circle is smaller and white to 'hollow out' larger black circle */
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after {
     background: white;
     height: calc(var(--mark-size) * .7);
     width: calc(var(--mark-size) * .7);
 }
 
+/* Styling the winning message screen using fixed positioning to overlay screen */
+.winning-message {
+    /* Set display to none by default as we only want to show it at the end of game */
+    display: none;
+    position: fixed;
+    /* Shorthand for top, right, bottom, left properties */
+    inset: 0;
+    /* Setting background color with transparency using rgb alpha channel */
+    background: rgba(0, 0, 0, .9);
+    /* Center winning text and button and display in a column */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Change font color and size for visibility */
+    color: white;
+    font-size: 5rem;
+}
+
+/* Style winning button for visibility. Giving it a pointer cursor, border and padding */
+.winning-message button {
+    font-size: 3rem;
+    background: white;
+    border: 1px solid black;
+    padding: .25em, .5em;
+    cursor: pointer;
+}
+
+/* Invert the button:hover styling */
+.winning-message button:hover {
+    background: black;
+    color: white;
+}
+
+/* Show end game screen by setting display to flex when adding .show to .winning-message class */
+.winning-message.show {
+    display: flex;
+}

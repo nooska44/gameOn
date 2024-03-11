@@ -23,14 +23,13 @@
   <!-- Classes are for CSS styling and id are for JavaScript (JS) -->
   
   <!-- GAME BOARD -->
+  <!-- change to class="board x" or "board circle" to see cursor in hover state -->
   <div class="board" id="board">
     <!-- 9 divs for 9 game tiles -->
     <!-- data-cell is for easy access in JS -->
-
-    <!-- Explicitly added x and circle class to 1st and 2nd div respectively, just to visualise them while coding CSS -->
-    <div class="cell x" data-cell></div>
-    <div class="cell circle" data-cell></div>
-    
+    <!-- Change to class="cell x" or class="cell circle" to see an X or O in the cell -->
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
     <div class="cell" data-cell></div>
     <div class="cell" data-cell></div>
     <div class="cell" data-cell></div>
@@ -41,8 +40,9 @@
   </div>
   
   <!-- END GAME SCREEN -->
+  <!-- Change to class="winning-message show" to see the end game screen -->
   <div class="winning-message" id="winningMessage">
-    <!-- div for winning message text -->
+    <!-- Text in this div displays above the restart button when end game screen is displayed -->
     <div data-winning-message-text></div>
     <!-- Restart button -->
     <button id="restartButton">Restart</button>
