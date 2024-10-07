@@ -10,18 +10,45 @@
   
   <link rel="stylesheet" href="css/style.css">
 
-  <title>Document</title>
+  <title>gameOn</title>
 
   <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon_io/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon_io/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon_io/favicon-16x16.png">
   <link rel="manifest" href="./images/favicon_io/site.webmanifest">
-
+  
 </head>
 
 <body>
-
-  <script type="text/javascript" src="js/main.js"></script>
+  <!-- Classes are for CSS styling and id are for JavaScript (JS) -->
+  
+  <!-- GAME BOARD -->
+  <!-- change to class="board x" or "board circle" to see cursor in hover state -->
+  <div class="board" id="board">
+    <!-- 9 divs for 9 game tiles -->
+    <!-- data-cell is for easy access in JS -->
+    <!-- Change to class="cell x" or class="cell circle" to see an X or O in the cell -->
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+    <div class="cell" data-cell></div>
+  </div>
+  
+  <!-- END GAME SCREEN -->
+  <!-- Change to class="winning-message show" to see the end game screen -->
+  <div class="winning-message" id="winningMessage">
+    <!-- Text in this div displays above the restart button when end game screen is displayed -->
+    <div data-winning-message-text></div>
+    <!-- Restart button -->
+    <button id="restartButton">Restart</button>
+  </div>
+<!-- Changed src from src="js/main.js to src="main.js" since main.js is same folder as index.html -->
+  <script type="text/javascript" src="main.js"></script>
 </body>
 
 </html>

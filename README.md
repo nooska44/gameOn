@@ -1,6 +1,6 @@
 # gameOn
 
-A small web based game.
+A small web based game of Tic-Tac-Toe. 
 
 
 <!-- **Link to project:** -->
@@ -25,6 +25,9 @@ Made with [contrib.rocks](https://contrib.rocks).
 ## How it's going to be made:
 **Tech we will use:** HTML, CSS & JavaScript
 
+After creating the necessary content in html. All styling was done with CSS Grid for the board and CSS variables for the X and O markers. By utilising pseudo elements we made attractive cursors with hover effects that could adapt to the game state.
+
+With JavaScript we employed a range of functions and event listeners to handle user input, automate player switching and check game state. By using destructuring and looping through arrays we could monitor win conditions. Upon game conclusion a result screen was toggled with the correct conditional message displayed. Finished with the ability to restart the game seamlessly.
 
 <!-- **Tech used:** HTML, CSS, JavaScript, Framework of choice
 

@@ -1,0 +1,180 @@
+/* Make everything border box */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* --cell-size variable set at 100px for the cells on game board */
+:root {
+    --cell-size: 100px;
+    /* the size of our X's and O's will be 90% of cell size */
+    --mark-size: calc(var(--cell-size) * .9);
+}
+
+
+/* Remove margins */
+body {
+    margin: 0;
+}
+
+.board {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    /* Center content */
+    justify-content: center;
+    align-content: center;
+    /* Center X's and O's */
+    justify-items: center;
+    align-items: center;    
+    /* 3 columns auto-sized */
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+    /* width & height are using cell-size set by the --cell-size variable in the :root further up the cascade */
+    width: var(--cell-size);
+    height: var(--cell-size); 
+    border: 1px solid black;
+    /* Need to display and center to show pseudo elements */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* Changed cursor to a pointer */
+    cursor: pointer;
+}
+
+/* If cell already has an X or O, cursor shows action is not-allowed */
+.cell.x,
+.cell.circle {
+    cursor: not-allowed;
+}
+
+/* Remove top borders */
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+/* Remove right borders */
+.cell:nth-child(3n) {
+    border-right: none;
+}
+
+/* Remove left borders */
+.cell:nth-child(3n + 1) {
+    border-left: none;
+}
+
+/* Remove bottom borders */
+.cell:nth-child(6) ~ .cell {
+    border-bottom: none;
+}
+
+/* Set cursor color to black */
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before {
+    background: black;
+}
+
+/* Set cursor color to gray when hovering utilising cascade */
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    background: lightgray;
+}
+
+/* Style X's */
+.cell.x::before,
+.cell.x::after,
+/* Styling X cursor on hover when not already .x or .circle class */
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after {
+    /* Provide content with height, width and background color to ensure the elements render */
+    content: '';
+    height: var(--mark-size);
+    width: calc(var(--mark-size) * .15);
+    position: absolute;
+}
+
+/* rotate class x before content on 45 degree angle to form one 'arm' of X */
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before {
+    transform: rotate(45deg);
+}
+
+/* rotate class x after content on -45 degree angle to form second 'arm' of X */
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after {
+    transform: rotate(-45deg);
+}
+
+/* Style O's */
+.cell.circle::before,
+.cell.circle::after,
+/* Styling O's on hover when not already .x or .circle class */
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    /* provide content so pseudo elements show */
+    content: '';
+    position: absolute;
+    /* Round the corners to transform square into circle */
+    border-radius: 50%;
+}
+
+/* First circle will be the larger 'outer' ring */
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    height: var(--mark-size);
+    width: var(--mark-size);
+}
+
+/* Second circle is smaller and white to 'hollow out' larger black circle */
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    background: white;
+    height: calc(var(--mark-size) * .7);
+    width: calc(var(--mark-size) * .7);
+}
+
+/* Styling the winning message screen using fixed positioning to overlay screen */
+.winning-message {
+    /* Set display to none by default as we only want to show it at the end of game */
+    display: none;
+    position: fixed;
+    /* Shorthand for top, right, bottom, left properties */
+    inset: 0;
+    /* Setting background color with transparency using rgb alpha channel */
+    background: rgba(0, 0, 0, .9);
+    /* Center winning text and button and display in a column */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Change font color and size for visibility */
+    color: white;
+    font-size: 5rem;
+}
+
+/* Style winning button for visibility. Giving it a pointer cursor, border and padding */
+.winning-message button {
+    font-size: 3rem;
+    background: white;
+    border: 1px solid black;
+    padding: .25em, .5em;
+    cursor: pointer;
+}
+
+/* Invert the button:hover styling */
+.winning-message button:hover {
+    background: black;
+    color: white;
+}
+
+/* Show end game screen by setting display to flex when adding .show to .winning-message class */
+.winning-message.show {
+    display: flex;
+}
